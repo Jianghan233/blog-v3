@@ -4,23 +4,23 @@ const basicConfig = {
 	title: '翞~涵',
 	subtitle: 'Ciallo～(∠・ω< )⌒★',
 	// 长 description 利好于 SEO
-	description: '翞~涵的博客，记录技术、开发、CTF、安全、生活等方面的点滴积累和思考（什么也不会四处剽窃）。', // 选填，建议不超过 200 字
+	description: '翞~涵的博客，记录技术、开发、CTF、安全、生活等方面的点滴积累和思考（偷看大手子项目中）。', // 选填，建议不超过 200 字
 	author: {
 		name: '翞~涵',
 		avatar: 'https://www.zhilu.site/api/avatar.png',
 		email: '1539208929@qq.com',
-		homepage: 'https://www.zhilu.site/',
+		homepage: 'https://blog.han1130.top/',
 	},
 	copyright: {
 		abbr: 'CC BY-NC-SA 4.0',
 		name: '署名-非商业性使用-相同方式共享 4.0 国际',
 		url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans',
 	},
-	favicon: 'https://www.zhilu.site/api/icon.png',
+	favicon: 'https://blog.han1130.top/favicon.ico',
 	language: 'zh-CN',
-	timeEstablished: '2019-07-19',
-	timeZone: 'Asia/Shanghai',
-	url: 'https://blog.zhilu.site/',
+	timeEstablished: '2026-05-21',
+	timeZone: 'Asia/henan',
+	url: 'https://blog.han1130.top/',
 	defaultCategory: '未分类',
 }
 
@@ -91,7 +91,7 @@ const blogConfig = {
 /** 用于生成 OPML 和友链页面配置 */
 export const myFeed: FeedEntry = {
 	author: blogConfig.author.name,
-	sitenick: '摸鱼处',
+	sitenick: 'QWQ',
 	title: blogConfig.title,
 	desc: blogConfig.subtitle || blogConfig.description,
 	link: blogConfig.url,
