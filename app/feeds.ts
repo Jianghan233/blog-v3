@@ -54,8 +54,8 @@ export default [
 	// #endregion
 	// #region XUPTers
 	{
-		name: 'XUPTers',
-		desc: '西安邮电大学的校友们。',
+		name: 'X',
+		desc: '大学的校友们。',
 		// @keep-sorted { "keys": ["date"] }
 		entries: [
 			{
