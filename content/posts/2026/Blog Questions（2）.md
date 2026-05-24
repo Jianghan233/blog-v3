@@ -3,7 +3,7 @@ title:博客的托管和域名
 description: 讲述关于Blog 搭建的故事，并写出个人经历。
 date: 2026-05-23 20:47:03
 updated: 2026-05-23 20:47:03
-image: # 封面图推荐 2:1，不含与标题重复的文字
+image: https://img.han1130.top/photo/e7267902f3495e35ddaeb4adb56811bb.png
 categories: [技术]
 tags: []
 recommend: true
