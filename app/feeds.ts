@@ -7,23 +7,23 @@ import { getFavicon, getGithubAvatar, getGithubIcon, getOciqGroupAvatar, getOicq
 export default [
 	// #region Clarity
 	{
-		name: '清晰体验',
-		desc: '保留带日后探索',
+		name: '大学的同学们',
+		desc: 'ctf相关的博客和工具，欢迎常来串门',
 		// @keep-sorted { "keys": ["date"] }
 		entries: [
 			myFeed,
 			{
-				author: '1111',
-				sitenick: '111',
-				title: '111',
-				desc: '介绍',
-				link: 'https://blog',
-				feed: 'https://blog',
-				icon: 'zi:SolarRewindBackBoldDuotone',
-				avatar: 'zi:SolarRewindBackBoldDuotone',
+				author: '2_haowen_V',
+				sitenick: '2_haowen_V',
+				title: '2_haowen_V',
+				desc: '一个喜欢研究网络的人',
+				link: 'https://hehaowen.com.cn/',
+				feed: 'https:',
+				icon: 'https://cravatar.cn/avatar',
+				avatar: 'https://',
 				archs: ['Nuxt', 'Netlify'],
-				date: '2023-12-23',
-				comment: '这是一个测试友链，看看能不能显示在清晰体验里。',
+				date: '2025-05-21',
+				comment: '带我入门CTF的大手子。',
 			},
 
 		],
@@ -31,8 +31,8 @@ export default [
 	// #endregion
 	// #region 网上邻居 since 2024
 	{
-		name: '网上邻居',
-		desc: '哔——啵——电波通讯中，欢迎常来串门。',
+		name: '大学的同学们',
+		desc: '欢迎常来串门。',
 		// @keep-sorted { "keys": ["date"] }
 		entries: [
 			{
