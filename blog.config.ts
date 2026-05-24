@@ -18,7 +18,7 @@ const basicConfig = {
 	},
 	favicon: 'https://blog.han1130.top/favicon.ico',
 	language: 'zh-CN',
-	timeEstablished: '2025-05-21',
+	timeEstablished: '2026-05-21',
 	timeZone: 'Asia/Shanghai',
 	url: 'https://blog.han1130.top/',
 	defaultCategory: '未分类',
