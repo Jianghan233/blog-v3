@@ -148,6 +148,11 @@ export default defineAppConfig({
 		/** 播放列表 */
 		audio: [
 			{
+				name: '平面交叉',
+				artist: '未知艺术家',
+				url: 'https://assets.han1130.top/%E5%B9%B3%E8%A1%8C%E4%BA%A4%E5%8F%89.mp3',
+			},
+			{
 				name: 'Lemon',
 				artist: '米津玄師',
 				url: 'https://music.163.com/song/media/outer/url?id=1317756086.mp3',
