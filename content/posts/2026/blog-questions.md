@@ -5,7 +5,7 @@ date: 2026-05-21 21:15:37
 updated: 2026-05-21 21:15:37
 image: https://img.han1130.top/img/2b0aeaead52a7d5a2f1363a9e2f02f77.png
 categories: [技术]
-tags: 讲述关于ssh报错和git push上传失败的故事。
+tags: []
 recommend: true
 ---
 ## 从起因说起

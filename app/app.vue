@@ -12,7 +12,12 @@
 </div>
 <BlogPanel />
 <BikariyaModals />
+<BlogPlayer v-if="appConfig.music?.audio?.length" :audio="appConfig.music.audio" />
 </template>
+
+<script setup lang="ts">
+const appConfig = useAppConfig()
+</script>
 
 <!-- eslint-disable-next-line vue/enforce-style-attribute -->
 <style lang="scss">
