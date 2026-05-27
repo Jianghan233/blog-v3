@@ -1,5 +1,5 @@
 ---
-title:博客的托管和域名
+title: 博客的托管和域名
 description: 讲述关于Blog 搭建的故事，并写出个人经历。
 date: 2026-05-23 20:47:03
 updated: 2026-05-23 20:47:03
@@ -56,7 +56,7 @@ recommend: true
 * 仓库越来越大：GitHub 会变成越来越大，clone 很慢。
 * 图片加载慢，Vercel：更适合网页。不适合大量图片 CDN。
 
-### R2 
+### R2
 
 因为：免费额度大，全球CDN，配 Cloudflare 很方便，基本不怕跑路
 
