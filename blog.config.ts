@@ -7,7 +7,7 @@ const basicConfig = {
 	description: '翞~涵的博客，记录技术、开发、CTF、安全、生活等方面的点滴积累和思考（偷看大手子项目中）。', // 选填，建议不超过 200 字
 	author: {
 		name: '翞~涵',
-		avatar: 'https://www.zhilu.site/api/avatar.png',
+		avatar: 'https://img.han1130.top/img/touxiang.png',
 		email: '1539208929@qq.com',
 		homepage: 'https://blog.han1130.top/',
 	},
@@ -16,7 +16,7 @@ const basicConfig = {
 		name: '署名-非商业性使用-相同方式共享 4.0 国际',
 		url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans',
 	},
-	favicon: 'https://blog.han1130.top/favicon.ico',
+	favicon: 'https://img.han1130.top/img/touxiang.png',
 	language: 'zh-CN',
 	timeEstablished: '2026-05-21',
 	timeZone: 'Asia/Shanghai',
@@ -83,8 +83,8 @@ const blogConfig = {
 
 	/** 自己部署的 Twikoo 服务 */
 	twikoo: {
-		envId: 'https://twikoo.zhilu.site/',
-		preload: 'https://twikoo.zhilu.site/',
+		envId: 'https://twikoo.',
+		preload: 'https://twikoo.',
 	},
 }
 

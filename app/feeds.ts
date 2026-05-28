@@ -14,7 +14,7 @@ export default [
 			myFeed,
 			{
 				author: '2_haowen_V',
-				sitenick: '2_haowen_V',
+				sitenick: '一个喜欢研究网络的人',
 				title: '2_haowen_V',
 				desc: '一个喜欢研究网络的人',
 				link: 'https://hehaowen.com.cn/',
@@ -30,27 +30,6 @@ export default [
 	},
 	// #endregion
 	// #region 网上邻居 since 2024
-	{
-		name: '大学的同学们',
-		desc: '欢迎常来串门。',
-		// @keep-sorted { "keys": ["date"] }
-		entries: [
-			{
-				author: '1111',
-				sitenick: '111',
-				title: '111',
-				desc: '介绍',
-				link: 'https://blog',
-				feed: 'https://blog',
-				icon: 'zi:SolarRewindBackBoldDuotone',
-				avatar: 'zi:SolarRewindBackBoldDuotone',
-				archs: ['Nuxt', 'Netlify'],
-				date: '2023-12-23',
-				comment: '这是一个测试友链，看看能不能显示在清晰体验里。',
-			},
-			/* ========从此处新增友链======== */
-		],
-	},
 	// #endregion
 	// #region XUPTers
 	{
