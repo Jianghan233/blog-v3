@@ -155,21 +155,9 @@ export default defineAppConfig({
 			{
 				name: 'Lemon',
 				artist: '米津玄師',
-				url: 'https://music.163.com/song/media/outer/url?id=1317756086.mp3',
+				url: 'https://assets.han1130.top/lemon.mp3',
 				cover: 'https://p2.music.126.net/gG5p6HjR84Jb8K8E7XQ29g==/109951164272745697.jpg',
 				lrc: '[00:00.00]Lemon - 米津玄師\n[00:05.00]夢ならばどれほどよかったでしょう\n[00:11.00]未だにあなたのことを夢に見る\n[00:17.00]忘れた物を取りに帰るように\n[00:23.00]古びた思い出の埃を払う\n[00:29.00]戻らない時だけが何故か輝いて\n[00:35.00]あなたの選んだ道を歩く',
-			},
-			{
-				name: '起风了',
-				artist: '买辣椒也用券',
-				url: 'https://music.163.com/song/media/outer/url?id=544652168.mp3',
-				cover: 'https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/109951163245728281.jpg',
-			},
-			{
-				name: '平凡之路',
-				artist: '朴树',
-				url: 'https://music.163.com/song/media/outer/url?id=26937680.mp3',
-				cover: 'https://p2.music.126.net/5LdG3GLTv6Kc7W0V47Z38g==/109951163141531212.jpg',
 			},
 		],
 	},
