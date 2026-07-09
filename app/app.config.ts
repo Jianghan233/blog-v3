@@ -85,7 +85,7 @@ export default defineAppConfig({
 				items: [
 					{ icon: 'simple-icons:nuxt', text: `主题: ${pascalCase(name)} ${version}`, url: 'https://github.com/Jianghan233/blog-v3' },
 					{ icon: 'tabler:color-swatch', text: '主题和组件文档', url: '/theme' },
-					{ icon: 'tabler:certificate', text: '陕ICP备1号', url: 'https://beian.miit.gov.cn/' },
+					{ icon: 'tabler:certificate', text: '豫ICP备2026025138号-1', url: 'https://beian.miit.gov.cn/' },
 				],
 			},
 		] satisfies Nav,
