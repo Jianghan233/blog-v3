@@ -4,7 +4,7 @@ const basicConfig = {
 	title: '翞~涵',
 	subtitle: 'Ciallo～(∠・ω< )⌒★',
 	// 长 description 利好于 SEO
-	description: '翞~涵的博客，记录技术、开发、CTF、安全、生活等方面的点滴积累和思考（偷看大手子项目中）。', // 选填，建议不超过 200 字
+	description: '用于记录日常生活、学习笔记，不断折腾踩坑的空间，分享Web安全比赛wp，复盘反思。', // 选填，建议不超过 200 字
 	author: {
 		name: '翞~涵',
 		avatar: 'https://img.han1130.top/img/touxiang.png',
@@ -20,7 +20,7 @@ const basicConfig = {
 	language: 'zh-CN',
 	timeEstablished: '2026-05-21',
 	timeZone: 'Asia/Shanghai',
-	url: 'https://blog.han1130.top/',
+	url: 'https://www.han1130.top/',
 	defaultCategory: '未分类',
 }
 
@@ -104,3 +104,4 @@ export const myFeed: FeedEntry = {
 }
 
 export default blogConfig
+
