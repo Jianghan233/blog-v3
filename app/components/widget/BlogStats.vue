@@ -14,6 +14,9 @@ const yearlyTip = computed(() => Object
 	.join('\n') || '数据获取失败',
 )
 
+// 访客统计由客户端插件记录访问后填充，SSR 首屏显示 '--'
+const { stats: visitorStats } = useVisitorStats()
+
 const blogStats = [{
 	label: '运营时长',
 	value: timeElapse(appConfig.timeEstablished),
@@ -29,6 +32,18 @@ const blogStats = [{
 	label: '总字数',
 	value: computed(() => formatNumber(stats.value?.total?.words) || '--'),
 	tip: yearlyTip,
+}, {
+	label: '总访问量',
+	value: computed(() => visitorStats.value ? formatNumber(visitorStats.value.total) : '--'),
+	tip: '历史唯一访客数（UV 去重）',
+}, {
+	label: '今日访问',
+	value: computed(() => visitorStats.value?.today ?? '--'),
+	tip: '今日唯一访客数',
+}, {
+	label: '当前在线',
+	value: computed(() => visitorStats.value?.online ?? '--'),
+	tip: '5 分钟内活跃的访客',
 }]
 </script>
 

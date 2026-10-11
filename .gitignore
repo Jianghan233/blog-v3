@@ -26,3 +26,5 @@ logs
 # Custom
 .vercel
 content/posts/test.md
+.env*
+!.env.example

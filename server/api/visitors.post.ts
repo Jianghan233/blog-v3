@@ -1,0 +1,1 @@
+export default defineEventHandler(async event => recordVisit(resolveVisitorUid(event)))
