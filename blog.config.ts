@@ -20,7 +20,7 @@ const basicConfig = {
 	language: 'zh-CN',
 	timeEstablished: '2026-05-21',
 	timeZone: 'Asia/Shanghai',
-	url: 'https://www.han1130.top/',
+	url: 'https://blog.han1130.top/',
 	defaultCategory: '未分类',
 }
 
