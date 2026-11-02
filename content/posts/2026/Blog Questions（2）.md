@@ -2,13 +2,12 @@
 title: 博客的托管、域名和图床
 description: 用 Vercel 部署博客、Cloudflare 管理域名解析，再配合 R2 和 PicList 存放文章图片。
 date: 2026-05-23 20:47:03
-updated: 2026-10-24 01:57:08
+updated: 2026-11-02 17:32:37
 image: https://img.han1130.top/photo/e7267902f3495e35ddaeb4adb56811bb.png
 categories: [技术]
 tags: [建站, Vercel, Cloudflare, R2, 图床]
 recommend: 1
 ---
-
 上一篇（[小白部署尝试的开源博客](/2026/blog-questions)）折腾到半夜，总算让博客在本地跑起来了。但“本地能跑”和“别人能点开”是两件事，这次把部署、域名和图床接起来：
 
 ```text
@@ -68,19 +67,58 @@ nslookup -type=ns han1130.top 8.8.8.8
 
 ## 三、把博客域名指向 Vercel
 
-DNS 接管后，还要告诉它博客放在哪里。这里使用 `blog.han1130.top`：
+DNS 接管后，还要告诉它博客放在哪里。先选定读者使用的地址，下面三个地址需要分别配置：
 
-1. 进入 Vercel 项目 **Settings → Domains**，添加 `blog.han1130.top`；
-2. 复制页面要求的 CNAME 目标，**以当前控制台显示的值为准**；
-3. 到 Cloudflare 的 **DNS → Records** 添加记录：
+| 想使用的地址 | Cloudflare 的“名称” | Vercel 通常要求的记录 |
+| --- | --- | --- |
+| `blog.han1130.top` | `blog` | CNAME，目标是一个域名 |
+| `www.han1130.top` | `www` | CNAME，目标是一个域名 |
+| `han1130.top`（根域名） | `@` | A，目标是一个 IPv4 地址 |
 
-   | 类型 | 名称 | 目标 | 代理状态 |
-   | --- | --- | --- | --- |
-   | CNAME | `blog` | Vercel 给出的目标地址 | **仅 DNS（灰云）** |
+**本文使用第一种，只需要配置 `blog`，不用额外添加 `www` 和 `@`。** 如果你选另外两种，把下面的地址和名称对应替换即可。实际记录类型、目标值以 Vercel 给该域名的要求为准，见[官方域名配置说明](https://vercel.com/docs/domains/working-with-domains/add-a-domain)。
 
-4. 回 Vercel 刷新，等配置有效、证书签发完成，再打开 `https://blog.han1130.top`。
+### 先在 Vercel 找到要填的值
 
-名称填 `blog` 即可，保存后核对完整域名是否正确；如果 Vercel 另行要求 TXT 所有权验证，也要补上。
+1. 登录 Vercel，从控制台点进已经部署成功的 `blog-v3` 项目，进入 **Settings → Domains**；
+2. 点击 **Add Domain**（添加域名，按钮名称可能略有不同），输入 `blog.han1130.top`，不带 `https://` 或路径；若要求选择环境，本文绑定正式站点，选择 **Production**，然后保存；
+3. 在域名列表找到刚添加的地址。尚未解析时通常显示 **Invalid Configuration**，展开该行的配置说明，部分界面需点 **Edit / 查看详情**，找到要求添加的 DNS 记录；
+4. 对照 **Type（类型）、Name（名称）、Value（值）** 三项。这里通常是 `CNAME`、`blog` 和一个 Vercel 目标域名，把 **Value 完整复制**下来。不要把自己的博客域名、示例中的 `xxx` 或随便找到的 Vercel IP 当成这个值。
+
+如果页面显示的是 `www` 或 `@`，先确认正在查看的是否是你想绑定的那个地址。如果提示需要 TXT 所有权验证，另外按提示添加 TXT，不能用它替代网站的 CNAME / A 记录。
+
+### 再到 Cloudflare 逐项填写
+
+1. 登录 Cloudflare，在域名列表点进 **`han1130.top`**，不是在 R2 桶里操作；
+2. 左侧进入 **DNS → Records（记录）**，点 **Add record（添加记录）**；
+3. 按下面填写：
+
+   | Cloudflare 字段 | 本文填写内容 |
+   | --- | --- |
+   | Type / 类型 | 选择 `CNAME` |
+   | Name / 名称 | `blog`，表示 `blog.han1130.top` |
+   | Target / 目标 | 粘贴刚从 Vercel 复制的 **Value**，不加 `https://` 或路径 |
+   | Proxy status / 代理状态 | 点云朵切换为 **DNS only / 仅 DNS（灰云）** |
+   | TTL | 保持 **Auto / 自动** |
+
+4. 点击 **Save（保存）**，在列表中核对记录。如果已有同名旧网站记录，先确认用途，再修改或替换冲突项，别把其他地址或邮箱记录一起删掉。
+
+如果选的是 `www.han1130.top`，就使用 Vercel 为 **www 那一行**给出的目标，名称填 `www`。如果选的是根域名，则按 Vercel 要求选择 `A`、名称填 `@`，把它给出的 IP 填进 **IPv4 address（IPv4 地址）**字段。
+
+> 例如，教程里常见的“CNAME / www / 某个域名”和“A / @ / 某个 IP”，分别对应 `www` 与根域名。**不是要同时给 `www` 添加 CNAME 和 A**：同一个名称的 CNAME 不能与 A / AAAA 并存。如果 Vercel 给你的具体方案不同，按它显示的类型填写。
+
+### 回到 Vercel 验证
+
+回到 **Settings → Domains**，刷新或点击域名旁的重新检查按钮。等待配置显示有效、HTTPS 证书签发完成，再打开 `https://blog.han1130.top`。
+
+也可以在本机终端查询这条记录：
+
+```bash
+nslookup -type=cname blog.han1130.top
+```
+
+灰云状态下，结果中的目标应与 Vercel 要求的 CNAME 一致；刚保存未查到时，等 DNS 缓存刷新后再试。若绑定的是根域名，则用 `nslookup -type=a han1130.top` 检查返回的 IP。
+
+想让根域名和 `www` 都能打开，需要在 Vercel **分别添加两个地址**，并在 Cloudflare 配好各自记录；如果只保留一个主要入口，再在 Vercel 的域名设置中把另一个设为重定向到主地址。DNS 解析本身不会让浏览器地址栏自动跳转。
 
 本文采用灰云，让浏览器直接连接 Vercel，这也是[官方优先建议的方式](https://vercel.com/kb/guide/can-i-use-a-proxy-on-top-of-my-vercel-deployment)。橙云并非一定导致证书失败，但会增加证书验证、缓存和访客 IP 识别的配置工作。灰云直连时，Cloudflare 的 SSL/TLS 加密模式不控制这条 HTTPS 连接。
 
@@ -94,8 +132,8 @@ R2 是 Cloudflare 的对象存储，兼容 S3 接口。它不收出站流量费�
 
 1. 进入 Cloudflare **Storage & databases → R2**，首次使用按提示开通订阅、设置付款信息，再点 **Create bucket**；
 2. 设置桶名，我用 `jiang-ran1130`。名字为 3–63 个小写字母、数字或短横线，不能以短横线开头或结尾；
-3. Location 选 **Automatic**，存储类别选 **Standard**；
-4. 进入桶的 **Settings → Custom Domains → Add**，填写 `img.han1130.top`，按向导确认 **Connect Domain**。
+3. Location 选 **Automatic**，存储类别选 **Standard**，点击 **Create bucket** 完成创建；
+4. 在桶列表点进 `jiang-ran1130`，进入 **Settings → Custom Domains → Add**，填写 `img.han1130.top`（换成自己域名下的子域名），按向导确认 **Connect Domain**。
 
 域名和桶须在同一个 Cloudflare 账户下。平台会创建所需 DNS 记录，等待 **Active** 即可，保留生成的配置，不要套用上一节 Vercel 的灰云设置。
 
@@ -117,20 +155,21 @@ PicList 通过 S3 接口上传，需要 R2 生成的访问密钥：
 
 [PicList](https://github.com/Kuingsmile/PicList/releases) 内置 AWS S3 图床，安装后新增对应配置。字段名可能随版本变化，下面按用途对照：
 
-| 字段 | 填什么 | 说明 |
-| --- | --- | --- |
-| Access Key ID | R2 生成的 Access Key ID | 上传凭据 |
-| Secret Access Key | 对应的 Secret Access Key | 本地保存 |
-| Bucket | `jiang-ran1130` | 桶名，不是域名 |
-| Region | `auto` | R2 使用的区域值 |
-| 接口地址 / endpoint | `https://<账户ID>.r2.cloudflarestorage.com` | 复制实际端点，不另加桶路径 |
-| 上传路径 / uploadPath | `img/` | 可选的对象键前缀 |
-| 公开 URL 前缀 / urlPrefix | `https://img.han1130.top` | 用于生成文章中的图片链接 |
-| 对象 ACL | `auto` | 当前版本省略 ACL 请求头，R2 不支持 S3 对象 ACL |
+
+| 字段                      | 填什么                                      | 说明                                           |
+| ------------------------- | ------------------------------------------- | ---------------------------------------------- |
+| Access Key ID             | R2 生成的 Access Key ID                     | 上传凭据                                       |
+| Secret Access Key         | 对应的 Secret Access Key                    | 本地保存                                       |
+| Bucket                    | `jiang-ran1130`                             | 桶名，不是域名                                 |
+| Region                    | `auto`                                      | R2 使用的区域值                                |
+| 接口地址 / endpoint       | `https://<账户ID>.r2.cloudflarestorage.com` | 复制实际端点，不另加桶路径                     |
+| 上传路径 / uploadPath     | `img/`                                      | 可选的对象键前缀                               |
+| 公开 URL 前缀 / urlPrefix | `https://img.han1130.top`                   | 用于生成文章中的图片链接                       |
+| 对象 ACL                  | `auto`                                      | 当前版本省略 ACL 请求头，R2 不支持 S3 对象 ACL |
 
 路径风格访问先保留默认。如果开启后公开链接多出桶名，而域名已对应桶根，再启用“URL 不加桶名前缀”，详细行为见[PicList 配置文档](https://piclist.cn/providers/s3)。
 
-保存、选中这套配置，上传一张小图，再检查两件事：
+保存后将这套配置设为默认，回到 PicList 的**上传区**，确认当前图床是 **AWS S3** 且选中了刚保存的配置。点击选择文件或把一张小图拖入上传区；上传完成后，从结果或**相册**复制图片 URL，再检查两件事：
 
 1. **上传是否成功**：R2 桶里能否找到文件，例如对象键 `img/photo.png`；
 2. **读者能否访问**：在未登录 Cloudflare 的浏览器窗口打开 `https://img.han1130.top/img/photo.png`。
@@ -165,12 +204,13 @@ DNS 缓存按 TTL 刷新，无痕窗口也不保证绕过系统或递归 DNS 缓
 
 ## 七、费用与后续维护
 
-| 项目 | 免费条件或费用 |
-| --- | --- |
-| Vercel | Hobby 限个人非商业用途，并有资源额度 |
-| Cloudflare DNS / CDN | 使用 Free 套餐包含的功能 |
-| R2 Standard | 每月含 10 GB-month 存储、100 万次 A 类操作、1000 万次 B 类操作 |
-| 域名 | 按注册商收费，首年价和续费价分开看 |
+
+| 项目                 | 免费条件或费用                                                 |
+| -------------------- | -------------------------------------------------------------- |
+| Vercel               | Hobby 限个人非商业用途，并有资源额度                           |
+| Cloudflare DNS / CDN | 使用 Free 套餐包含的功能                                       |
+| R2 Standard          | 每月含 10 GB-month 存储、100 万次 A 类操作、1000 万次 B 类操作 |
+| 域名                 | 按注册商收费，首年价和续费价分开看                             |
 
 R2 超出免费额度后按量计费，Infrequent Access 不适用上述免费额度；Vercel 超出部分额度可能限制功能或站点。具体以[R2 价格页](https://developers.cloudflare.com/r2/pricing/)和[Vercel Hobby 说明](https://vercel.com/docs/plans/hobby)为准。
 
